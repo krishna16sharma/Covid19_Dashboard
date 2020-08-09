@@ -1,0 +1,17 @@
+.infocard{
+     border: 2px solid;
+     border-color: #FFFFFF;
+     border-radius: 5px;
+     width: 50%;
+     margin-left: auto;
+     margin-right: auto;
+     background-color: #111;
+     padding : 1px;
+}
+
+@media screen and (max-width: 600px) {
+  .infocard{
+      font-size: 0.9rem;
+      padding: 5px;
+  }
+}
