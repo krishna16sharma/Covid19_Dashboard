@@ -14,4 +14,4 @@ The data displayed in the website is the cumulative stats.
 
 ## Source of Data
 The data on this dashboard is obtained from COVID19-India API maintained by COVID-19 India Org Data Operations Group. It is a volunteer-driven, crowd-sourced database for COVID-19 stats & patient tracing in India.
-You can find their reopsitory [here](https://github.com/amodm/api-covid19-in).
+You can find their repository [here](https://github.com/amodm/api-covid19-in).
