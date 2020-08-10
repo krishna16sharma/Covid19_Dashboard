@@ -10,10 +10,12 @@ class SReport extends React.Component{
         }
     }
     getInfo = (place) =>{
-        //console.log(place);
+
         var table = document.getElementById("statTable");
-        var delta = 0;
         try{
+            var d_active = 0;
+            var d_deceased = 0;
+            var d_recovered = 0;
             console.log(place[this.state.sName]['districtData']);
             for(var district in place[this.state.sName]['districtData']){
                 var row = table.insertRow(-1);
@@ -22,14 +24,28 @@ class SReport extends React.Component{
                 var cell2 = row.insertCell(1);
                 var cell3 = row.insertCell(2);
                 var cell4 = row.insertCell(3);
-                //console.log(district);
+
                 cell1.innerHTML = district;
                 cell2.innerHTML = place[this.state.sName]['districtData'][district]['active'];
                 cell3.innerHTML = place[this.state.sName]['districtData'][district]['deceased'];
                 cell4.innerHTML = place[this.state.sName]['districtData'][district]['recovered'];
-                delta+=(place[this.state.sName]['districtData'][district]['delta']['confirmed']);
+
+                d_active +=  place[this.state.sName]['districtData'][district]['active'];
+                d_deceased += place[this.state.sName]['districtData'][district]['deceased'];
+                d_recovered += place[this.state.sName]['districtData'][district]['recovered'];
             }
-            console.log(delta);
+            var lrow = table.insertRow(-1);
+            var lcell1 = lrow.insertCell(0);
+            var lcell2 = lrow.insertCell(1);
+            var lcell3 = lrow.insertCell(2);
+            var lcell4 = lrow.insertCell(3);
+
+            lcell1.innerHTML = 'Total';
+            lcell2.innerHTML = d_active;
+            lcell3.innerHTML = d_deceased;
+            lcell4.innerHTML = d_recovered;
+
+            lcell1.className = 'red_cell';
         }
         catch(err){
             window.alert("Invalid Input");

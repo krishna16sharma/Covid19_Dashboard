@@ -9,6 +9,7 @@ table th{
     color: #f2f2f2;
     background-color: #9b2300;
 }
+
 table td, table th{
     border: 2px solid #440000;
     padding: 8px;
@@ -34,6 +35,11 @@ table tr:nth-child(odd){
 #SReportButton:hover{
     cursor: pointer;
     background-color: #333;
+}
+
+.red_cell{
+    color: #f2f2f2;
+    background-color: #9b2300;
 }
 
 @media screen and (max-width: 600px) {

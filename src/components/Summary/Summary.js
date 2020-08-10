@@ -11,7 +11,6 @@ class Summary extends React.Component{
             deceased: this.props.deceased,
             cured: this.props.cured
         }
-        //console.log("Summary",this.state);
     }
     //Since the props will change after API fetch, Summary component must re-render to reflect changes
     static getDerivedStateFromProps(nextProps, prevState){
