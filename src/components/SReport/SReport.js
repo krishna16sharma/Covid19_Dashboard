@@ -1,5 +1,7 @@
 import React from 'react';
-import './SReport.css'
+import {CanvasJSChart} from 'canvasjs-react-charts'
+import './SReport.css';
+
 
 class SReport extends React.Component{
     constructor(props){
@@ -9,6 +11,7 @@ class SReport extends React.Component{
             places: this.props.data
         }
     }
+
     getInfo = (place) =>{
 
         var table = document.getElementById("statTable");
@@ -59,7 +62,7 @@ class SReport extends React.Component{
         var table = document.getElementById("statTable");
         table.style.visibility = 'visible';
         var rows = table.rows.length;
-        console.log(rows);
+        //console.log(rows);
         while(rows>1){
             table.deleteRow(-1);
             rows-=1;
@@ -75,11 +78,56 @@ class SReport extends React.Component{
 
     }
     render(){
+        var dataPoints = []
+        var d_confirmed = 0;
+        console.log(this.state.places);
+        for(var states in this.state.places){
+            d_confirmed = 0
+            for(var district in this.state.places[states]['districtData']){
+                d_confirmed+=this.state.places[states]['districtData'][district]['confirmed']
+            }
+            //console.log(this.state.places[states]['statecode'])
+            if(states!='State Unassigned'){
+                dataPoints.push({'label':states, 'y':d_confirmed})
+            }
+        }
+        console.log(dataPoints)
+
+        const options={
+                zoomEnabled: true,
+                animationEnabled: true,
+			    theme: "dark2",
+                title:{
+                    text:"Confirmed cases in each State"
+                },
+                axisY: {
+				title: "No. of Confirmed Cases",
+				labelFormatter: this.addSymbols,
+                scaleBreaks: {
+				                autoCalculate: true
+			                 }
+			    },
+			    axisX: {
+				    title: "States",
+				    labelAngle: 0,
+                    viewportMinimum: 0,
+                    viewportMaximum: 6
+			    },
+                data: [{
+                    type: "column",
+                    indexLabel: "{y}",
+				    indexLabelFontColor: "white",
+                    dataPoints : dataPoints
+                }]
+        }
         return(
             <div>
                 <h1>Statewise Report</h1>
                 <hr/>
-                <p>Select your State or Union Territory from the dropdown list.</p>
+                <p>Below is the graph for the number of confirmed cases for each state. You can scroll horizontally to view all states.
+                Click on the 'Pan' button on the top-right corner to toggle scroll.</p>
+                <CanvasJSChart options = {options}/>
+                <p>To view a detailed table, select your State or Union Territory from the dropdown list.</p>
                 <form>
                   <input list="States" name="state" id="StatesDL" placeholder="Choose a State or UT"/>
                   <datalist id="States">

@@ -26,7 +26,7 @@ class App extends Component {
                 var actives = 0;
                 var deaths = 0;
                 var cured = 0;
-                //console.log(result);
+                console.log(result);
                 for(var state in result){
                     var states = result[state]
                     //console.log(states);
